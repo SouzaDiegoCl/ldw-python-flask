@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/style.css')}}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+      rel="stylesheet"
+    />    
 
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
       @theme {
         --color-main-color: #282828;
@@ -153,7 +160,7 @@
                     </div>
                   </el-menu>
                 </el-dropdown>
-                <el-dropdown class="inline-block" >
+                <el-dropdown class="inline-block">
                   <button
                     class="inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-sm font-normal text-accent-color cursor-pointer"
                   >
@@ -331,11 +338,36 @@
     <!-- Conteúdo -->
 
     {% endblock content %}
+    <footer></footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1"
+      type="module"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper(".multiple-slide-carousel", {
+        loop: false,
+        slidesPerView: 3,
+        spaceBetween: 4,
+        navigation: {
+          nextEl: ".multiple-slide-carousel .swiper-button-next",
+          prevEl: ".multiple-slide-carousel .swiper-button-prev",
+        },
+        breakpoints: {
+          1920: {
+            slidesPerView: 3,
+            spaceBetween: 24,
+          },
+          1028: {
+            slidesPerView: 3,
+            spaceBetween: 22,
+          },
+          990: {
+            slidesPerView: 1,
+            spaceBetween: 16,
+          },
+        },
+      });
+    </script>
   </body>
-  <footer></footer>
-
-  <script
-    src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1"
-    type="module"
-  ></script>
 </html>

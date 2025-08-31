@@ -96,17 +96,18 @@
   </dialog>
 </el-dialog>
 
-<div class="h-[100vh] bg-main-color-dark">
+<div class="h-[100vh] bg-main-color-dark flex flex-row">
+  <!-- SIDEBAR -->
   <div
-    class="h-[100%] w-[260px] ps-4 pt-6 bg-main-color-dark overflow-y-scroll overflow-x-hidden scroller"
+    class="h-[100%] w-[20vw] ps-4 pt-6 bg-main-color-dark overflow-y-scroll overflow-x-hidden scroller"
   >
     <div class="min-h-[10%]">
       <div
-        class="flex flex-col justify-center align-center gap-2 w-[95%] border-b-2 pb-6 border-gray-detail-light-color"
+        class="flex flex-col justify-center gap-2 w-[95%] border-b-2 pb-6 border-gray-detail-light-color"
       >
         <a
           href="#"
-          class="block rounded-md px-2 py-2 text-base font-semibold text-white bg-gray-detail-light-color"
+          class="rounded-md px-2 py-2 text-base font-semibold text-white bg-gray-detail-light-color flex flex-row items-center"
         >
           <img
             src="{{url_for('static', filename='imgs/icon_sidebar_books.png')}}"
@@ -118,7 +119,7 @@
         </a>
         <a
           href=""
-          class="rounded-md px-3 py-2 text-base font-semibold text-white hover:bg-gray-detail-light-color"
+          class="rounded-md px-3 py-2 text-base font-semibold text-white hover:bg-gray-detail-light-color flex flex-row items-center"
         >
           <img
             src="{{url_for('static', filename='imgs/icon_sidebar_graduation_cap.png')}}"
@@ -216,6 +217,104 @@
         </a>
         {% endfor %}
       </details>
+    </div>
+  </div>
+  <!-- END SIDEBAR -->
+  <!-- MAIN CONTENT -->
+  <div class="w-[60vw] px-6 pt-12">
+    <div class="w-full relative">
+      <div class="swiper multiple-slide-carousel swiper-container relative">
+        <div class="absolute left-0 right-0 bottom-0 w-full h-full">
+          <button
+            id="slider-button-left"
+            class="swiper-button-prev group !p-2 flex justify-center items-center !w-8 !h-8 transition-all duration-500 rounded-full bg-white/90 hover:bg-white/70"
+            data-carousel-prev
+          >
+            <svg
+              class="h-8 w-8 text-black group-hover:text-black"
+              xmlns="http://www.w3.org/2000/svg"              
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <path
+                d="M10.0002 11.9999L6 7.99971L10.0025 3.99719"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <button
+            id="slider-button-right"
+            class="swiper-button-next group !p-2 flex justify-center items-center !w-8 !h-8 transition-all duration-500 rounded-full bg-white/90 hover:bg-white/70"
+            data-carousel-next
+          >
+            <svg
+              class="h-10 w-10 text-black group-hover:text-black"
+              xmlns="http://www.w3.org/2000/svg"              
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <path
+                d="M5.99984 4.00012L10 8.00029L5.99748 12.0028"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="swiper-wrapper mb-16">
+          <div class="swiper-slide">
+            <div class="rounded-2xl h-34">
+              <img
+                src="{{url_for('static', filename='imgs/main_content_carousel_item-01.png')}}"
+                alt="School Time Leet Code Advertisement"
+                class="w-[100%] h-[100%] rounded-2xl"
+              />
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="rounded-2xl h-34">
+              <img
+                src="{{url_for('static', filename='imgs/main_content_carousel_item-02.jpeg')}}"
+                alt="School Time Leet Code Advertisement"
+                class="w-[100%] h-[100%] rounded-2xl"
+              />
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="rounded-2xl h-34">
+              <img
+                src="{{url_for('static', filename='imgs/main_content_carousel_item-03.png')}}"
+                alt="School Time Leet Code Advertisement"
+                class="w-[100%] h-[100%] rounded-2xl"
+              />
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="rounded-2xl h-34">
+              <img
+                src="{{url_for('static', filename='imgs/main_content_carousel_item-04.png')}}"
+                alt="School Time Leet Code Advertisement"
+                class="w-[100%] h-[100%] rounded-2xl"
+              />
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="rounded-2xl h-34">
+              <img
+                src="{{url_for('static', filename='imgs/main_content_carousel_item-05.png')}}"
+                alt="School Time Leet Code Advertisement"
+                class="w-[100%] h-[100%] rounded-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END MAIN CONTENT -->
     </div>
   </div>
 </div>

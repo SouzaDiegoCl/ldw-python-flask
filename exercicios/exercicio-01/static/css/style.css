@@ -1,6 +1,40 @@
-* {    
-}
+* {}
 
 .scroller {
     scrollbar-color: #9f9f9f #2c2c2c;
 }
+
+
+/* MAIN CONTENT CAROUSEL */
+.swiper-wrapper {
+    width: 100%;
+    height: max-content !important;
+    padding-bottom: 64px !important;
+    -webkit-transition-timing-function: linear !important;
+    transition-timing-function: linear !important;
+    position: relative;
+}
+
+.swiper-pagination-bullet {
+    background: #000000;
+}
+
+#slider-button-left {
+    transform: translate(0, -180%);
+}
+
+#slider-button-right {
+    transform: translate(0, -180%);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: black !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    display: none;
+}
+
+/* END MAIN CONTENT CAROUSEL */
