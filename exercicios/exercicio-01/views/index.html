@@ -1,6 +1,222 @@
-{% extends 'template/base.html'%}
-{% block content %}
-<div class="h-[100vh] bg-main-color-dark">
+{% extends 'template/base.html'%} {% block content %}
+<el-dialog>
+  <dialog
+    id="dialog"
+    aria-labelledby="dialog-title"
+    class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent"
+  >
+    <el-dialog-backdrop
+      class="fixed inset-0 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in backdrop-blur-xs"
+    ></el-dialog-backdrop>
 
+    <div
+      tabindex="0"
+      class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0"
+    >
+      <el-dialog-panel
+        class="relative transform overflow-hidden rounded-lg bg-main-color text-left shadow-xl outline -outline-offset-1 outline-white/10 transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+      >
+        <form action="{{url_for('index')}}" method="post">
+          <div class="bg-main-color pt-5 pb-4 px-6">
+            <div class="sm:flex sm:items-start">
+              <div class="text-center sm:text-left w-[100%]">
+                <h3 id="dialog-title" class="text-lg font-semibold text-white">
+                  Create New List
+                </h3>
+                <div class="mt-4 flex flex-col gap-4">
+                  <div class="flex flex-col gap-1">
+                    <label
+                      for="inputTitle"
+                      class="text-sm font-semibold text-white"
+                      >Title</label
+                    >
+                    <input
+                      type="text"
+                      id="inputTitle"
+                      name="inputTitle"
+                      placeholder="Enter a list name"
+                      required
+                      class="border-1 border-gray-detail-color rounded-md focus:border-1.5 focus:border-white focus:outline-none p-1 ps-3 text-gray-color placeholder:text-gray-color placeholder:text-sm placeholder:pe-4"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <label
+                      for="inputDescription"
+                      class="text-sm font-semibold text-white"
+                      >Description</label
+                    >
+                    <textarea
+                      name="inputDescription"
+                      id="inputDescription"
+                      placeholder="Describe your list"
+                      required
+                      class="w-[100%] border-1 border-gray-detail-color rounded-md focus:border-1.5 focus:border-white focus:outline-none p-1 ps-3 text-gray-color placeholder:text-gray-color placeholder:text-sm resize-none"
+                    ></textarea>
+                    <div class="flex items-end justify-end w-[100%]">
+                      <span id="span">0</span><span>/150</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-14 ps-1">
+              <input
+                type="checkbox"
+                name="inputIsPrivate"
+                id="inputIsPrivate"
+                class="w-[15px] h-[15px] border-white rounded-lg not-checked:accent-transparent bg-black border-1 checked:accent-white bg-black"
+              />
+              <label for="inputIsPrivate" class="">Private</label>
+            </div>
+          </div>
+
+          <div
+            class="bg-main-color px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
+          >
+            <button
+              type="submit"
+              command="close"
+              commandfor="dialog"
+              class="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-black hover:bg-white/90 sm:ml-3 sm:w-auto"
+            >
+              Create
+            </button>
+            <button
+              type="button"
+              command="close"
+              commandfor="dialog"
+              class="mt-3 inline-flex w-full justify-center rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20 sm:mt-0 sm:w-auto"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </el-dialog-panel>
+    </div>
+  </dialog>
+</el-dialog>
+
+<div class="h-[100vh] bg-main-color-dark">
+  <div
+    class="h-[100%] w-[260px] ps-4 pt-6 bg-main-color-dark overflow-y-scroll overflow-x-hidden scroller"
+  >
+    <div class="min-h-[10%]">
+      <div
+        class="flex flex-col justify-center align-center gap-2 w-[95%] border-b-2 pb-6 border-gray-detail-light-color"
+      >
+        <a
+          href="#"
+          class="block rounded-md px-2 py-2 text-base font-semibold text-white bg-gray-detail-light-color"
+        >
+          <img
+            src="{{url_for('static', filename='imgs/icon_sidebar_books.png')}}"
+            alt="Ícone Book"
+            width="28px"
+            height="28px"
+            class="inline align-middle"
+          />&nbsp; Library
+        </a>
+        <a
+          href=""
+          class="rounded-md px-3 py-2 text-base font-semibold text-white hover:bg-gray-detail-light-color"
+        >
+          <img
+            src="{{url_for('static', filename='imgs/icon_sidebar_graduation_cap.png')}}"
+            alt="Ícone Interview"
+            width="28px"
+            height="28px"
+            class="inline align-middle"
+          />&nbsp; Study Plan
+        </a>
+      </div>
+    </div>
+    <div class="max-w-[95%] mt-6 text-gray-color">
+      <details class="mb-2 ps-1" open>
+        <summary
+          class="rounded-lg cursor-pointer flex flex-row items-center justify-between"
+        >
+          <span class="text-sm font-semibold text-gray-color">My Lists</span>
+          <el-dropdown class="inline-block">
+            <button
+              class="inline-flex w-full h-full justify-center items-center gap-x-1.5 text-xl font-normal text-gray-300 cursor-pointer px-2 py-2 rounded-md hover:bg-gray-detail-light-color"
+            >
+              <span class="text-xl leading-none font-normal text-white">+</span>
+              <svg
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                data-slot="icon"
+                aria-hidden="true"
+                class="-mr-1 size-4 text-gray-300"
+              >
+                <path
+                  d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                  clip-rule="evenodd"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </button>
+
+            <el-menu
+              anchor="bottom start"
+              popover
+              class="w-55 origin-top-right rounded-md bg-main-color outline-1 -outline-offset-1 outline-white/10 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+            >
+              <div class="py-1 px-1">
+                <button
+                  command="show-modal"
+                  commandfor="dialog"
+                  class="flex flex-row items-center px-2 py-2 w-[100%] text-sm text-gray-300 rounded-md focus:bg-white/5 focus:text-white focus:outline-hidden"
+                >
+                  <img
+                    src="{{url_for('static', filename='imgs/icon_plus_white.png')}}"
+                    alt="Ícone Interview"
+                    class="h-[14px] w-[14px]"
+                  />&nbsp; <span class="">New List</span>
+                </button>
+                <a
+                  href="#"
+                  class="flex flex-row items-center px-2 py-2 text-sm text-purple rounded-md focus:bg-white/5 focus:outline-hidden"
+                  ><img
+                    src="{{url_for('static', filename='imgs/icon_sidebar_electrons.png')}}"
+                    alt="Ícone Interview"
+                    class="h-[14px] w-[14px]"
+                  />&nbsp; <span class="">New Smart List...</span></a
+                >
+              </div>
+            </el-menu>
+          </el-dropdown>
+        </summary>
+        {% for myListItem in myList %}
+        <a
+          href="#"
+          class="rounded-md py-1 pe-0.5 text-sm font-semibold text-white hover:bg-gray-detail-light-color flex flex-row justify-between items-center"
+        >
+          <div>
+            <img
+              src="{{url_for('static', filename='imgs/icon_sidebar_books.png')}}"
+              alt="Ícone Book"
+              width="25px"
+              height="25px"
+              class="inline align-middle"
+            />&nbsp; {{myListItem.title}}
+          </div>
+          {% if myListItem.visibility == 'private' %}
+          <img
+            src="{{url_for('static', filename='imgs/icon_menu_lock.png')}}"
+            alt="Ícone Book"
+            class="h-[18px] w-[14px]"
+          />
+          {% else %}
+          <img
+            src="{{url_for('static', filename='imgs/icon_menu_world.png')}}"
+            alt="Ícone Book"
+            class="h-[15px] w-[15px]"
+          />
+          {% endif %}
+        </a>
+        {% endfor %}
+      </details>
+    </div>
+  </div>
 </div>
 {% endblock content %}

@@ -1,5 +1,6 @@
-* {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #000;
+* {    
 }
 
+.scroller {
+    scrollbar-color: #9f9f9f #2c2c2c;
+}
