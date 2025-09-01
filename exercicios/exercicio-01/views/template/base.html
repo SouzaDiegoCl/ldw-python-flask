@@ -12,7 +12,7 @@
     <link
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
       rel="stylesheet"
-    />    
+    />
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
@@ -28,12 +28,12 @@
       }
     </style>
   </head>
-  <body>
+  <body class="bg-main-color-dark">
     <nav
       class="relative bg-main-color after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10 border-b-0.5 border-gray-detail-color"
     >
       <div class="mx-auto max-w-7xl px-1">
-        <div class="relative flex h-12 items-center justify-between">
+        <div class="relative flex h-[8vh] items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
             <!-- Mobile menu button-->
             <button
@@ -89,29 +89,29 @@
             <div class="hidden sm:ml-6 sm:block">
               <div class="flex space-x-4">
                 <a
-                  href="#"
-                  class="rounded-md px-3 py-2 text-sm font-normal text-gray-300 hover:text-white"
+                  href="{{url_for('index')}}"
+                  class="rounded-md px-3 py-2 text-sm font-normal text-white cursor-pointer highlight-effect"
                   >Explore</a
                 >
                 <a
-                  href="#"
+                  href="{{url_for('edit_problems_list')}}"
                   aria-current="page"
-                  class="rounded-md px-3 py-2 text-sm font-normal text-white"
+                  class="rounded-md px-3 py-2 text-sm font-normal text-gray-300 hover:text-white cursor-pointer highlight-effect"
                   >Problems</a
                 >
                 <a
                   href="#"
-                  class="rounded-md px-3 py-2 text-sm font-normal text-gray-300 hover:text-white"
+                  class="rounded-md px-3 py-2 text-sm font-normal text-gray-300 hover:text-white cursor-default"
                   >Contest</a
                 >
                 <a
                   href="#"
-                  class="rounded-md px-3 py-2 text-sm font-normal text-gray-300 hover:text-white"
+                  class="rounded-md px-3 py-2 text-sm font-normal text-gray-300 hover:text-white cursor-default"
                   >Discuss</a
                 >
                 <el-dropdown class="inline-block">
                   <button
-                    class="inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-sm font-normal text-gray-300 cursor-pointer"
+                    class="flex flex-row w-full justify-center items-start gap-x-.5 px-3 py-2 text-sm font-normal text-gray-300 cursor-pointer"
                   >
                     Interview
                     <svg
@@ -119,7 +119,7 @@
                       fill="currentColor"
                       data-slot="icon"
                       aria-hidden="true"
-                      class="-mr-1 size-5 text-gray-300 h-[25px]"
+                      class="size-5 text-gray-300"
                     >
                       <path
                         d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
@@ -137,7 +137,7 @@
                     <div class="py-1 px-1">
                       <a
                         href="#"
-                        class="block px-4 py-2 text-sm text-gray-300 rounded-md focus:bg-white/5 focus:text-white focus:outline-hidden"
+                        class="block px-4 py-2 text-sm text-gray-300 rounded-md focus:bg-white/5 focus:text-white focus:outline-hidden cursor-default"
                         ><img
                           src="{{url_for('static', filename='imgs/icon_menu_interview.png')}}"
                           alt="Ícone Interview"
@@ -148,7 +148,7 @@
                       >
                       <a
                         href="#"
-                        class="block px-4 py-2 text-sm text-gray-300 rounded-md focus:bg-white/5 focus:text-white focus:outline-hidden"
+                        class="block px-4 py-2 text-sm text-gray-300 rounded-md focus:bg-white/5 focus:text-white focus:outline-hidden cursor-default"
                         ><img
                           src="{{url_for('static', filename='imgs/icon_menu_assessment.png')}}"
                           alt="Ícone Interview"
@@ -162,7 +162,7 @@
                 </el-dropdown>
                 <el-dropdown class="inline-block">
                   <button
-                    class="inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-sm font-normal text-accent-color cursor-pointer"
+                    class="flex flex-row w-full justify-center items-start gap-x-.5 px-3 py-2 text-sm font-normal text-accent-color cursor-pointer"
                   >
                     Store
                     <svg
@@ -170,7 +170,7 @@
                       fill="currentColor"
                       data-slot="icon"
                       aria-hidden="true"
-                      class="-mr-1 size-5 text-accent-color h-[25px]"
+                      class="size-5 text-accent-color"
                     >
                       <path
                         d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
@@ -188,12 +188,12 @@
                     <div class="py-1 p-1">
                       <a
                         href="#"
-                        class="block px-2 py-2 text-sm text-accent-color focus:bg-white/5 focus:outline-hidden rounded-md"
+                        class="block px-2 py-2 text-sm text-accent-color focus:bg-white/5 focus:outline-hidden rounded-md cursor-default"
                         >Redeem</a
                       >
                       <a
                         href="#"
-                        class="block px-2 py-2 text-sm text-accent-color focus:bg-white/5 focus:outline-hidden rounded-md"
+                        class="block px-2 py-2 text-sm text-accent-color focus:bg-white/5 focus:outline-hidden rounded-md cursor-default"
                         >Premium</a
                       >
                     </div>
@@ -347,7 +347,7 @@
     <script>
       var swiper = new Swiper(".multiple-slide-carousel", {
         loop: false,
-        slidesPerView: 3,
+        slidesPerView: 1,
         spaceBetween: 4,
         navigation: {
           nextEl: ".multiple-slide-carousel .swiper-button-next",
@@ -363,11 +363,51 @@
             spaceBetween: 22,
           },
           990: {
-            slidesPerView: 1,
+            slidesPerView: 2,
             spaceBetween: 16,
           },
         },
       });
+    </script>
+    <script>
+      function deleteProblem(name) {
+        if (!confirm(`Tem certeza que deseja remover "${name}"?`)) return;
+
+        fetch(`/remove_item/${encodeURIComponent(name)}`, {
+          method: "DELETE",
+        })
+          .then((response) => {
+            alert(`"${name}" removido com sucesso.`);
+            location.reload();
+          })
+          .catch((error) => {
+            console.error("Erro:", error);
+            alert("Erro na requisição.");
+          });
+      }
+    </script>
+    <script>
+      function changeSelectColor(select) {
+        const value = select.value;
+        select.classList.remove(
+          "text-[#1aabba]",
+          "text-accent-color",
+          "text-[#e93731]"
+        );
+
+        if (value === "Easy") {
+          select.classList.add("text-[#1aabba]");
+        } else if (value === "Medium") {
+          select.classList.add("text-accent-color");
+        } else if (value === "Hard") {
+          select.classList.add("text-[#e93731]");
+        }
+      }
+
+      window.onload = function () {
+        const select = document.getElementById("difficultInput");
+        changeSelectColor(select);
+      };
     </script>
   </body>
 </html>

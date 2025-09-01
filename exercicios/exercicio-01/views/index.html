@@ -96,10 +96,10 @@
   </dialog>
 </el-dialog>
 
-<div class="h-[100vh] bg-main-color-dark flex flex-row">
+<div class="bg-main-color-dark flex flex-row">
   <!-- SIDEBAR -->
   <div
-    class="h-[100%] w-[20vw] ps-4 pt-6 bg-main-color-dark overflow-y-scroll overflow-x-hidden scroller"
+    class="sticky top-0 h-screen w-[20vw] ps-4 pt-6 bg-main-color-dark overflow-y-scroll overflow-x-hidden scroller hidden lg:block"
   >
     <div class="min-h-[10%]">
       <div
@@ -139,7 +139,7 @@
           <span class="text-sm font-semibold text-gray-color">My Lists</span>
           <el-dropdown class="inline-block">
             <button
-              class="inline-flex w-full h-full justify-center items-center gap-x-1.5 text-xl font-normal text-gray-300 cursor-pointer px-2 py-2 rounded-md hover:bg-gray-detail-light-color"
+              class="inline-flex w-full h-full justify-center items-center gap-x-1.5 text-xl font-normal text-gray-300 cursor-pointer px-2 py-2 rounded-md hover:bg-gray-detail-light-color highlight-effect"
             >
               <span class="text-xl leading-none font-normal text-white">+</span>
               <svg
@@ -166,7 +166,7 @@
                 <button
                   command="show-modal"
                   commandfor="dialog"
-                  class="flex flex-row items-center px-2 py-2 w-[100%] text-sm text-gray-300 rounded-md focus:bg-white/5 focus:text-white focus:outline-hidden"
+                  class="flex flex-row items-center px-2 py-2 w-[100%] text-sm text-gray-300 rounded-md focus:bg-white/5 focus:text-white focus:outline-hidden highlight-effect"
                 >
                   <img
                     src="{{url_for('static', filename='imgs/icon_plus_white.png')}}"
@@ -187,19 +187,27 @@
             </el-menu>
           </el-dropdown>
         </summary>
-        {% for myListItem in myList %}
+        {% for myListItem in my_list %}
         <a
           href="#"
           class="rounded-md py-1 pe-0.5 text-sm font-semibold text-white hover:bg-gray-detail-light-color flex flex-row justify-between items-center"
         >
           <div>
+            {% if loop.index == 1 %}
             <img
-              src="{{url_for('static', filename='imgs/icon_sidebar_books.png')}}"
+              src="{{url_for('static', filename='imgs/sidebar_star_icon.webp')}}"
               alt="Ícone Book"
-              width="25px"
-              height="25px"
-              class="inline align-middle"
-            />&nbsp; {{myListItem.title}}
+              width="22px"
+              height="22px"
+              class="inline align-middle rounded-md"
+            />&nbsp; {{myListItem.title}} {% else %}
+            <img
+              src="{{url_for('static', filename='imgs/sidebar_note_icon.png')}}"
+              alt="Ícone Book"
+              width="22px"
+              height="22px"
+              class="inline align-middle rounded-md"
+            />&nbsp; {{myListItem.title}} {% endif %}
           </div>
           {% if myListItem.visibility == 'private' %}
           <img
@@ -221,7 +229,7 @@
   </div>
   <!-- END SIDEBAR -->
   <!-- MAIN CONTENT -->
-  <div class="w-[60vw] px-6 pt-12">
+  <div class="w-[100vw] lg:w-[80vw] px-2 lg:px-6 pt-12">
     <div class="w-full relative">
       <div class="swiper multiple-slide-carousel swiper-container relative">
         <div class="absolute left-0 right-0 bottom-0 w-full h-full">
@@ -232,7 +240,7 @@
           >
             <svg
               class="h-8 w-8 text-black group-hover:text-black"
-              xmlns="http://www.w3.org/2000/svg"              
+              xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
               fill="none"
             >
@@ -252,7 +260,7 @@
           >
             <svg
               class="h-10 w-10 text-black group-hover:text-black"
-              xmlns="http://www.w3.org/2000/svg"              
+              xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
               fill="none"
             >
@@ -266,9 +274,9 @@
             </svg>
           </button>
         </div>
-        <div class="swiper-wrapper mb-16">
+        <div class="swiper-wrapper !p-0">
           <div class="swiper-slide">
-            <div class="rounded-2xl h-34">
+            <div class="rounded-2xl">
               <img
                 src="{{url_for('static', filename='imgs/main_content_carousel_item-01.png')}}"
                 alt="School Time Leet Code Advertisement"
@@ -277,7 +285,7 @@
             </div>
           </div>
           <div class="swiper-slide">
-            <div class="rounded-2xl h-34">
+            <div class="rounded-2xl h-[100%]">
               <img
                 src="{{url_for('static', filename='imgs/main_content_carousel_item-02.jpeg')}}"
                 alt="School Time Leet Code Advertisement"
@@ -286,7 +294,7 @@
             </div>
           </div>
           <div class="swiper-slide">
-            <div class="rounded-2xl h-34">
+            <div class="rounded-2xl h-[100%]">
               <img
                 src="{{url_for('static', filename='imgs/main_content_carousel_item-03.png')}}"
                 alt="School Time Leet Code Advertisement"
@@ -295,7 +303,7 @@
             </div>
           </div>
           <div class="swiper-slide">
-            <div class="rounded-2xl h-34">
+            <div class="rounded-2xl h-[100%]">
               <img
                 src="{{url_for('static', filename='imgs/main_content_carousel_item-04.png')}}"
                 alt="School Time Leet Code Advertisement"
@@ -304,7 +312,7 @@
             </div>
           </div>
           <div class="swiper-slide">
-            <div class="rounded-2xl h-34">
+            <div class="rounded-2xl h-[100%]">
               <img
                 src="{{url_for('static', filename='imgs/main_content_carousel_item-05.png')}}"
                 alt="School Time Leet Code Advertisement"
@@ -314,8 +322,206 @@
           </div>
         </div>
       </div>
-      <!-- END MAIN CONTENT -->
     </div>
+    <div
+      class="w-full flex flex-row justify-between flex-wrap text-xs text-white mt-8"
+    >
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>Array</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >1977</span
+        >
+      </div>
+
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>String</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >809</span
+        >
+      </div>
+
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>Hash Table</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >722</span
+        >
+      </div>
+
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>Dynamic Programming</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >609</span
+        >
+      </div>
+
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>Math</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >607</span
+        >
+      </div>
+
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>Sorting</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >467</span
+        >
+      </div>
+
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>Greedy</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >430</span
+        >
+      </div>
+    </div>
+    <div
+      class="w-full flex flex-row justify-start gap-4 flex-wrap text-xs text-white mt-8"
+    >
+      <div
+        class="flex flex-row px-6 py-2 bg-white text-main-color-dark text-base rounded-full"
+      >
+        <img src="" alt="" />
+        <span>All Topics</span>
+      </div>
+      <div
+        class="flex flex-row px-6 py-2 bg-gray-detail-light-color text-gray-color text-base rounded-full"
+      >
+        <img src="" alt="" />
+        <span>Algorithms</span>
+      </div>
+      <div
+        class="flex flex-row px-6 py-2 bg-gray-detail-light-color text-gray-color text-base rounded-full"
+      >
+        <img src="" alt="" />
+        <span>Database</span>
+      </div>
+      <div
+        class="flex flex-row px-6 py-2 bg-gray-detail-light-color text-gray-color text-base rounded-full"
+      >
+        <img src="" alt="" />
+        <span>Shell</span>
+      </div>
+      <div
+        class="flex flex-row px-6 py-2 bg-gray-detail-light-color text-gray-color text-base rounded-full"
+      >
+        <img src="" alt="" />
+        <span>Concurrency</span>
+      </div>
+    </div>
+    <hr class="my-4 border-1.5 border-main-color" />
+    <!-- SEARCH PROBLEM -->
+    <div class="flex flex-row justify-between items-center">
+      <div class="flex flex-row gap-1">
+        <label
+          for="default-search"
+          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+          >Search</label
+        >
+        <div class="relative">
+          <div
+            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+          >
+            <svg
+              class="w-4 h-4 text-gray-500 dark:text-gray-400"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+              />
+            </svg>
+          </div>
+          <input
+            type="search"
+            id="default-search"
+            class="block w-full py-1 ps-10 text-sm text-gray-900 rounded-full bg-main-color dark:border-gray-600 dark:placeholder-gray-color dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Search questions"
+            required
+          />
+        </div>
+        <div
+          class="rounded-full w-[28px] h-[28px] bg-main-color cursor-pointer flex justify-center items-center"
+        >
+          <img
+            src="{{url_for('static', filename='imgs/search_container_icon_imagem_sort.png')}}"
+            class="filter-icon w-[60%] h-[60%]"
+          />
+        </div>
+        <div
+          class="rounded-full w-[28px] h-[28px] bg-main-color cursor-pointer flex justify-center items-center"
+        >
+          <img
+            src="{{url_for('static', filename='imgs/search_container_icon_imagem_filter.png')}}"
+            class="filter-icon w-[50%] h-[50%]"
+          />
+        </div>
+      </div>
+
+      <div class="flex flex-row items-center gap-1.5">
+        <div
+          class="w-[20px] h-[20px] rounded-full border-gray-detail-color border-2"
+        ></div>
+        <span class="text-gray-color text-sm"
+          >{{problems_solved}}/{{ problems_list | length }} Solved</span
+        >
+        <div
+          class="rounded-full w-[28px] h-[28px] cursor-pointer flex justify-center items-center"
+        >
+          <img
+            src="{{url_for('static', filename='imgs/search_container_icon_imagem_shuffle.png')}}"
+            class="filter-icon-shuffle w-[50%] h-[50%]"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- END SEARCH PROBLEM -->
+    <!-- PROBLEMS LIST -->
+    <div class="w-full mt-4 problemList cursor-pointer">
+      {% for problem in problems_list %}
+      <div
+        class="flex flex-row justify-between px-4 py-3 lg:pe-32 md:pe-32 text-sm rounded-lg"
+      >
+        <span class="w-120 text-white font-semibold"
+          >{{loop.index}}. {{problem.name}}</span
+        >
+        <div class="flex flex-row gap-2 sm:gap-1">
+          <span class="w-30 text-gray-color">{{problem.solutionPercent}}%</span>
+          {% if problem.difficulty == "Easy" %}
+          <span class="text-[#1aabba]">Easy</span>
+          {% elif problem.difficulty == "Medium" %}
+          <span class="text-accent-color">Med.</span>
+          {% else %}
+          <span class="text-[#e93731]">Hard</span>
+          {% endif %}
+          <a
+            href="{{url_for('edit_problems_list')}}"
+            class="rounded-full w-[28px] h-[28px] bg-main-color cursor-pointer flex justify-center items-center highlight-effect ms-8"
+          >
+            <img
+              src="{{url_for('static', filename='imgs/search_container_icon_imagem_edit.png')}}"
+              class="w-[50%] h-[60%]"
+            />
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- END PROBLEMS LIST -->
   </div>
+  <!-- END MAIN CONTENT -->
 </div>
 {% endblock content %}

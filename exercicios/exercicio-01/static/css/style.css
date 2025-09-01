@@ -19,13 +19,13 @@
     background: #000000;
 }
 
-#slider-button-left {
-    transform: translate(0, -180%);
+/* #slider-button-left {
+    transform: translate(0, 0%);
 }
 
 #slider-button-right {
     transform: translate(0, -180%);
-}
+} */
 
 .swiper-button-next,
 .swiper-button-prev {
@@ -37,4 +37,52 @@
     display: none;
 }
 
+
 /* END MAIN CONTENT CAROUSEL */
+
+.problemList> :nth-child(odd) {
+    background-color: #272727;
+}
+
+.filter-icon {
+    filter: brightness(4) opacity(0.9);
+}
+
+.filter-icon-shuffle {
+    filter: brightness(2) opacity(0.9);
+}
+
+.filter-icon-trash-can {
+    filter: brightness(9) opacity(0.9);
+}
+
+.highlight-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.highlight-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 25%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.2) 100%);
+    transform: skewX(-15deg);
+    animation: shimmer 4s infinite;
+}
+
+@keyframes shimmer {
+    1.5% {
+        left: -150%;
+    }
+
+    25% {
+        left: 110%;
+    }
+
+    100% {
+        left: 110%;
+    }
+}

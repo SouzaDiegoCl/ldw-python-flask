@@ -1,0 +1,113 @@
+{% extends 'template/base.html' %} {% block content %}
+<div class="w-[95vw] mx-auto mt-14 pb-12">
+  <div class="w-fit px-8 py-4 rounded-lg border-white border-2">
+    <span class="font-bold text-xl text-gray-color">New Problem:</span>
+    <form action="{{url_for('add_problem')}}" method="post" class="w-full">
+      <div class="mt-4">
+        <label for="nameInput" class="font-semibold text-lg text-gray-color"
+          >Name:</label
+        >
+        <input
+          type="text"
+          name="nameInput"
+          class="border-1 border-gray-color rounded-lg h-8 placeholder:text-gray-color placeholder:font-semibold px-4 text-gray-color font-bold px-4"
+          placeholder="problem name..."
+        />
+      </div>
+      <br />
+      <label for="difficultInput" class="font-semibold text-lg text-gray-color"
+        >Difficulty</label
+      >
+      <select
+        id="frutas"
+        name="difficultInput"
+        class="border border-gray-300 rounded-md h-8 px-4 font-bold text-[#1aabba]"
+        onchange="changeSelectColor(this)"
+      >
+        <option
+          value="Easy"
+          class="border-1 bg-main-color-dark border-none rounded-full h-6 px-4 text-[#1aabba] font-bold px-4"
+        >
+          Easy
+        </option>
+        <option
+          value="Medium"
+          class="border-1 bg-main-color-dark border-none rounded-full h-6 px-4 text-accent-color font-bold px-4"
+        >
+          Medium
+        </option>
+        <option
+          value="Hard"
+          class="border-1 bg-main-color-dark border-none rounded-full h-6 px-4 text-[#e93731] font-bold px-4"
+        >
+          Hard
+        </option>
+      </select>
+
+      <br />
+      <input
+        type="submit"
+        value="Add"
+        class="mt-4 w-[90%] bg-white rounded-full font-bold text-black"
+      />
+    </form>
+  </div>
+
+  <div class="overflow-auto mt-8">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+      <thead class="text-xs text-gray-700 uppercase bg-[#272727]">
+        <tr
+          class="[&>td]:px-4 [&>th]:py-6 [&>th]:text-sm [&>th]:font-bold [&>th]:text-white sm:[&>td]:px-0 rounded-l-full"
+        >
+          <th scope="col" class="px-6 py-3 rounded-l-full">Index</th>
+          <th scope="col" class="px-6 py-3">Name</th>
+          <th scope="col" class="px-6 py-3">Solution Rate</th>
+          <th scope="col" class="px-6 py-3">Difficulty</th>
+          <!-- <th scope="col" class="px-6 py-3">Edit</th> -->
+          <th scope="col" class="px-6 py-3 rounded-r-full border-[#fff]">
+            Delete
+          </th>
+        </tr>
+      </thead>
+      <tbody class="[&>tr:nth-child(even)]:bg-[#272727] [&>tr]:text-white">
+        {% for problem_item in problems_list %}
+        <tr class="[&>td]:px-4 [&>td]:py-3">
+          <td class="rounded-l-lg font-semibold">{{loop.index}}</td>
+          <td class="font-semibold">{{problem_item.name}}</td>
+          <td>{{problem_item.solutionPercent}}</td>
+          {% if problem_item.difficulty == "Easy" %}
+          <td class="text-[#1aabba]">{{problem_item.difficulty}}</td>
+          {% elif problem_item.difficulty == "Medium" %}
+          <td class="text-accent-color">{{problem_item.difficulty}}</td>
+          {% else %}
+          <td class="text-[#e93731]">{{problem_item.difficulty}}</td>
+          {% endif %}
+          <!-- <td>
+          <a
+            href="{{url_for('edit_problems_list')}}"
+            class="rounded-full w-[25px] h-[25px] cursor-pointer flex justify-center items-center highlight-effect ms-8"
+          >
+            <img
+              src="{{url_for('static', filename='imgs/search_container_icon_imagem_edit.png')}}"
+              class="w-[75%] h-[70%] filter-icon-trash-can"
+            />
+          </a>
+        </td> -->
+          <td class="rounded-r-lg">
+            <button
+              onclick="deleteProblem('{{ problem_item.name }}')"
+              class="rounded-full w-[25px] h-[25px] cursor-pointer flex justify-center items-center highlight-effect ms-8"
+            >
+              <img
+                src="{{url_for('static', filename='imgs/edit_problems_delete_Icon.png')}}"
+                class="w-[70%] h-[70%] filter-icon-trash-can"
+              />
+            </button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}
