@@ -368,8 +368,10 @@
           },
         },
       });
-    </script>
-    <script>
+    
+
+
+      
       function deleteProblem(name) {
         if (!confirm(`Tem certeza que deseja remover "${name}"?`)) return;
 
@@ -385,8 +387,10 @@
             alert("Erro na requisição.");
           });
       }
-    </script>
-    <script>
+
+      
+
+
       function changeSelectColor(select) {
         const value = select.value;
         select.classList.remove(
@@ -408,6 +412,40 @@
         const select = document.getElementById("difficultInput");
         changeSelectColor(select);
       };
+      
+      
+
+
+      const input = document.getElementById("inputDescription");
+      const counter = document.getElementById("inputDescriptionCharactersQTD");
+
+      input.addEventListener("input", () => {
+        const currentLength = input.value.length;
+        counter.textContent = currentLength;
+
+        if (currentLength >= 140) {
+          counter.classList.add("text-red-500");
+        } else {
+          counter.classList.remove("text-red-500");
+        }
+      });
+    
+
+
+
+      const inputName = document.getElementById("inputTitle");
+      const counterName = document.getElementById("inputTitleCharactersQTD");
+      
+      inputName.addEventListener("input", () => {
+        const currentLength = inputName.value.length;
+        counterName.textContent = currentLength;
+
+        if (currentLength >= 25) {
+          counterName.classList.add("text-red-500");
+        } else {
+          counterName.classList.remove("text-red-500");
+        }
+      });
     </script>
   </body>
 </html>
