@@ -88,7 +88,7 @@ problems_list = [
         "difficulty": "Easy", "done": False},
     {"name": "Valid Sudoku", "solutionPercent": 63.4,
         "difficulty": "Medium", "done": False},
-    {"name": "Sudoku Solver", "solutionPercent": 65.2,
+    {"name": "Sudoku", "solutionPercent": 65.2,
         "difficulty": "Hard", "done": False}
 ]
 
@@ -125,20 +125,40 @@ def init_app(app):
     @app.route('/remove_item/<string:problem_name>', methods=['DELETE'])
     def remove_item(problem_name):
         global problems_list
-        updated_items = [item for item in problems_list if item.get("name") != problem_name]
+        updated_items = [item for item in problems_list if item.get(
+            "name") != problem_name]
         problems_list = updated_items
-    
+
     @app.route('/add_problem', methods=['POST'])
     def add_problem():
         global problems_list
 
         name = request.form.get('nameInput')
-        difficulty = request.form.get('difficultInput')                
+        difficulty = request.form.get('difficultInput')
         problems_list.insert(0, {"name": name, "solutionPercent": 00.0,
-        "difficulty": difficulty, "done": False})
+                                 "difficulty": difficulty, "done": False})
         return redirect(url_for('edit_problems_list'))
 
-    @app.route('/edit_single_problem', methods=['GET'])
-    def edit_single_problem():
+    @app.route('/edit_single_problem/<string:name>', methods=['GET', 'POST'])
+    def edit_single_problem(name=None):
         global problems_list
-        return render_template('edit_single_problem.html')
+
+        if name and request.method == 'GET':
+            selected_problem = [
+                problem for problem in problems_list if problem["name"] == name][0]
+            return render_template('edit_single_problem.html', selected_problem=selected_problem)
+        elif name and request.method == 'POST':
+            inputNameValue = request.form.get('editNameInput')
+            inputDifficultyValue = request.form.get('editDifficultyInput')
+            inputSolutionPercentValue = request.form.get(
+                'editSolutionPercentInput')
+
+            for problem in problems_list:
+                if problem['name'] == name:
+                    problem['name'] = inputNameValue
+                    problem['difficulty'] = inputDifficultyValue
+                    problem['solutionPercent'] = inputSolutionPercentValue
+                    break  # já encontrou, pode sair do loop
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('index'))
