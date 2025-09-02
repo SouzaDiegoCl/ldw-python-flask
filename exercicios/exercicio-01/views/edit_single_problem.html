@@ -1,0 +1,35 @@
+{% extends 'template/base.html' %} {% block content %}
+
+<div class="w-full">
+  <div class="w-[100%] lg:w-[50%]">
+    <div class="w-full h-[32px] bg-gray-detail-color flex flex-row justify-between rounded-tl-lg rounded-tr-lg border-1 border-gray-color">
+      <div class="w-10 h-10 flex fex-row gap-2">
+        <img src="{{url_for('static', filename='imgs/edit_problems_delete_Icon.png')}}" alt="" />
+        <span>Description</span>
+      </div>
+      <div class="w-10 h-10 flex fex-row gap-2">
+        <span>Editorial</span>
+      </div>
+      <div class="w-10 h-10 flex fex-row gap-2">
+        <span>Solutions</span>
+      </div>
+      <div class="w-10 h-10 flex fex-row gap-2">
+        <span>Submissions</span>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="w-[100%] lg:w-[50%]"></div>
+  <form action="">
+    <label for="">aaa</label>
+    <input type="text" />
+    <br />
+    <label for=""></label>
+    <input type="text" />
+    <br />
+    <label for=""></label>
+    <input type="text" />
+  </form>
+</div>
+
+{% endblock content %}

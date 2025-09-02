@@ -137,3 +137,8 @@ def init_app(app):
         problems_list.insert(0, {"name": name, "solutionPercent": 00.0,
         "difficulty": difficulty, "done": False})
         return redirect(url_for('edit_problems_list'))
+
+    @app.route('/edit_single_problem', methods=['GET'])
+    def edit_single_problem():
+        global problems_list
+        return render_template('edit_single_problem.html')
