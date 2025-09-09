@@ -1,0 +1,42 @@
+{% extends 'template/base.html'%} {% block content %}
+
+<div class="sub-header">
+  <div class="flex flex-row items-center justify-center text-white text-sm">
+    <img
+      src="{{url_for('static', filename='imgs/store_megaphone_icon.svg')}}"
+      alt="Megaphone icon"
+    /><span
+      >Discover
+      <a href="" class="text-[#107ae4]">how you can earn rewards</a> by inviting
+      more people to join LeetCode!</span
+    >
+  </div>
+  <div class="flex flex-row items-center gap-4">
+    <div
+      class="w-8 h-8 rounded-full bg-[#373635] flex items-center justify-center"
+    >
+      <img
+        src="{{url_for('static', filename='imgs/store_link_icon.png')}}"
+        alt="Link Icon"
+        class="w-4"
+      />
+    </div>
+    <img
+      src="{{url_for('static', filename='imgs/store_facebook_icon.png')}}"
+      alt="Link Icon"
+      class="w-8"
+    />
+    <img
+      src="{{url_for('static', filename='imgs/store_linkedin_icon.png')}}"
+      alt="Link Icon"
+      class="w-8"
+    />
+    <img
+      src="{{url_for('static', filename='imgs/store_twitter_icon.png')}}"
+      alt="Link Icon"
+      class="w-8"
+    />
+  </div>
+</div>
+
+{% endblock content %}

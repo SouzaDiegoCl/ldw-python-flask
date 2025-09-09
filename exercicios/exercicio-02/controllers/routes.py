@@ -162,3 +162,7 @@ def init_app(app):
             return redirect(url_for('index'))
         else:
             return redirect(url_for('index'))
+    
+    @app.route('/store', methods=['GET'])
+    def store():
+        return render_template('store_page.html')
