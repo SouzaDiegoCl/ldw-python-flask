@@ -1,5 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy # pip install flask-sqlAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
+# Criando a instância do SQLAlchemy
 db = SQLAlchemy()
 
 class Game(db.Model):
@@ -11,11 +12,11 @@ class Game(db.Model):
     price = db.Column(db.Float)
     quantity = db.Column(db.Integer)
     
-    # Método Construtor da Classe
+    # Método construtor da classe
     def __init__(self, title, year, category, platform, price, quantity):
-        self.title = title,
-        self.year = year,
-        self.category = category,
-        self.platform = platform,
-        self.price = price,
-        self.quantity = quantity,
+        self.title = title
+        self.year = year
+        self.category = category
+        self.platform = platform
+        self.price = price
+        self.quantity = quantity

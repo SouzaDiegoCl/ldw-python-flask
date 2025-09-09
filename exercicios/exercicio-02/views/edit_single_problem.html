@@ -1,0 +1,145 @@
+{% extends 'template/base.html' %} {% block content %}
+
+<div
+  class="w-ful h-[84vh] flex flex-row flex-wrap gap-2 justify-center px-1 py-2"
+>
+  <div class="w-[100%] lg:w-[48%] md:w-[48%]">
+    <div
+      class="w-full h-fit pb-2 md:pb-0 md:h-[38px] bg-gray-detail-dark-color flex flex-row flex-wrap items-center justify-start gap-3 rounded-tl-lg rounded-tr-lg border-t-1 border-l-1 border-r-1 border-gray-color text-gray-color font-normal text-sm"
+    >
+      <div class="flex fex-row items-center gap-1 ms-4">
+        <img
+          src="{{url_for('static', filename='imgs/edit_single_problem_icon_description.png')}}"
+          class="w-[15px] h-[15px]"
+        />
+        <span class="text-white font-semibold">Description</span>
+      </div>
+      <span>|</span>
+      <div class="flex fex-row items-center gap-1">
+        <img
+          src="{{url_for('static', filename='imgs/edit_single_problem_icon_editorial.png')}}"
+          class="w-[25px] h-[25px]"
+        />
+        <span>Editorial</span>
+      </div>
+      <span>|</span>
+      <div class="flex fex-row items-center gap-1">
+        <img
+          src="{{url_for('static', filename='imgs/edit_single_problem_icon_solutions.png')}}"
+          class="w-[15px] h-[15px]"
+        />
+        <span>Solutions</span>
+      </div>
+      <span>|</span>
+      <div class="flex fex-row items-center gap-1">
+        <img
+          src="{{url_for('static', filename='imgs/edit_single_problem_icon_subimissions.png')}}"
+          class="w-[14px] h-[14px]"
+        />
+        <span>Submissions</span>
+      </div>
+    </div>
+    <div
+      class="bg-gray-detail-light-color h-[100%] ps-4 pt-4 border-x-1 border-main-color rounded-b-lg border-b-1 border-gray-color"
+    >
+      <form action="{{url_for('edit_single_problem', name=selected_problem.name)}}" method="post">
+        <input
+          type="text"
+          name="editNameInput"
+          minlength="1"
+          maxlength="100"
+          value="{{selected_problem.name}}"
+          class="text-sm md:text-sm lg:text-2xl font-semibold text-white border-white border-1 rounded-lg px-2 py-1"
+        />
+        <div class="mt-2 flex flex-row gap-1 justify-start text-xs font-normal">
+          <select
+            id="frutas"
+            name="editDifficultyInput"
+            class="border border-gray-300 rounded-md px-1 font-bold  {% if selected_problem.difficulty == 'Easy' %} text-[#1aabba] {% elif selected_problem.difficulty == 'Medium' %} text-accent-color {% else %} text-[#e93731]  {% endif %}"
+            onchange="changeSelectColor(this)"
+          >
+            <option
+              value="Easy"
+              class="border-1 bg-main-color-dark border-none rounded-full h-6 px-4 text-[#1aabba] font-bold px-4"
+             {% if selected_problem.difficulty == 'Easy' %}
+              selected
+              {% endif %}
+            >
+              Easy
+            </option>
+            <option
+              value="Medium"
+              class="border-1 bg-main-color-dark border-none rounded-full h-6 px-4 text-accent-color font-bold px-4"
+              {% if selected_problem.difficulty == 'Medium' %}
+              selected
+              {% endif %}
+            >
+              Medium
+            </option>
+            <option
+              value="Hard"
+              class="border-1 bg-main-color-dark border-none rounded-full h-6 px-4 text-[#e93731] font-bold px-4"
+              {% if selected_problem.difficulty == 'Hard' %}
+              selected
+              {% endif %}
+            >
+              Hard
+            </option>
+          </select>          
+          <div>
+            <input
+              type="text"
+              name="editSolutionPercentInput"
+              class="w-[50px] px-2 py-0.5 text-white rounded-full border-1 rounded-lg"
+              value="{{selected_problem.solutionPercent}}%"
+            />
+          </div>
+          <span
+            class="px-2 py-0.5 bg-gray-detail-color text-white rounded-full flex flex-row gap-2 items-center justify-center"
+            ><img
+              src="{{url_for('static', filename='imgs/edit_single_problem_icon_lamp.png')}}"
+              class="w-[14px] h-[14px]"
+            />
+            Hint</span
+          >
+        </div>
+        <p class="text-white font-normal mt-4">
+          You are given a 2D array points of size n x 2 representing integer
+          coordinates of some points on a 2D plane, where points[i] = [xi, yi].
+        </p>
+        <p class="text-white font-normal mt-4">
+          Count the number of pairs of points (A, B), where
+        </p>
+        <p class="text-white font-normal mt-4">
+          A is on the upper left side of B, and there are no other points in the
+          rectangle (or line) they make (including the border). Return the
+          count.
+        </p>
+        <button
+          type="submit"
+          class="w-[250px] bg-white rounded-full py-1 px-2 text-black font-semibold mt-8 cursor-pointer hover:bg-white/90"
+        >
+          Editar
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="w-[100%] lg:w-[48%] md:w-[48%]">
+    <div
+      class="w-full h-[38px] bg-gray-detail-dark-color flex flex-row items-center flex-wrap justify-start gap-3 rounded-tl-lg rounded-tr-lg border-t-1 border-l-1 border-r-1 border-gray-color text-gray-color font-normal text-sm"
+    >
+      <div class="flex fex-row items-center gap-1 ms-4">
+        <img
+          src="{{url_for('static', filename='imgs/edit_single_problem_icon_code.png')}}"
+          class="w-[20px] h-[20px]"
+        />
+        <span class="text-white font-semibold">Code</span>
+      </div>
+    </div>
+    <div
+      class="bg-main-color h-[100%] ps-4 pt-4 border-x-1 border-gray-color rounded-b-lg border-b-1 border-gray-color"
+    ></div>
+  </div>
+
+  {% endblock content %}
+</div>

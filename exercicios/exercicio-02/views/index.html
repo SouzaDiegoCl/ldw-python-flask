@@ -1,0 +1,548 @@
+{% extends 'template/base.html'%} {% block content %}
+<el-dialog>
+  <dialog
+    id="dialog"
+    aria-labelledby="dialog-title"
+    class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent"
+  >
+    <el-dialog-backdrop
+      class="fixed inset-0 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in backdrop-blur-xs"
+    ></el-dialog-backdrop>
+
+    <div
+      tabindex="0"
+      class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0"
+    >
+      <el-dialog-panel
+        class="relative transform overflow-hidden rounded-lg bg-main-color text-left shadow-xl outline -outline-offset-1 outline-white/10 transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+      >
+        <form action="{{url_for('index')}}" method="post">
+          <div class="bg-main-color pt-5 pb-4 px-6">
+            <div class="sm:flex sm:items-start">
+              <div class="text-center sm:text-left w-[100%]">
+                <h3 id="dialog-title" class="text-lg font-semibold text-white">
+                  Create New List
+                </h3>
+                <div class="mt-4 flex flex-col gap-4">
+                  <div class="flex flex-col gap-1">
+                    <label
+                      for="inputTitle"
+                      class="text-sm font-semibold text-white"
+                    >
+                      Title
+                    </label>
+
+                    <!-- Wrapper com posição relativa -->
+                    <div class="relative w-full">
+                      <input
+                        type="text"
+                        id="inputTitle"
+                        name="inputTitle"
+                        maxlength="30"
+                        placeholder="Enter a list name"
+                        required
+                        class="w-full border border-gray-detail-color rounded-md focus:border-white focus:outline-none p-1 ps-3 pe-12 text-gray-color placeholder:text-gray-color placeholder:text-sm"
+                      />
+
+                      <div                        
+                        class="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-400 pointer-events-none"
+                      >
+                        <span id="inputTitleCharactersQTD">0</span>
+                        <span>/30</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <label
+                      for="inputDescription"
+                      class="text-sm font-semibold text-white"
+                      >Description</label
+                    >
+                    <textarea
+                      name="inputDescription"
+                      id="inputDescription"
+                      placeholder="Describe your list"
+                      maxlength="150"
+                      required
+                      class="w-[100%] min-h-28 border-1 border-gray-detail-color rounded-md focus:border-1.5 focus:border-white focus:outline-none p-1 ps-3 text-gray-color placeholder:text-gray-color placeholder:text-sm resize-none"
+                    ></textarea>
+                    <div
+                      class="flex items-end justify-end w-[100%] text-gray-color text-xs"
+                    >
+                      <span id="inputDescriptionCharactersQTD">0</span
+                      ><span>/150</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-14 ps-1">
+              <input
+                type="checkbox"
+                name="inputIsPrivate"
+                id="inputIsPrivate"
+                class="w-[15px] h-[15px] border-white rounded-lg not-checked:accent-transparent bg-black border-1 checked:accent-white bg-black"
+              />
+              <label
+                for="inputIsPrivate"
+                class="text-gray-color font-semibold text-sm"
+                >Private</label
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-main-color px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
+          >
+            <button
+              type="submit"
+              command="close"
+              commandfor="dialog"
+              class="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-black hover:bg-white/90 sm:ml-3 sm:w-auto"
+            >
+              Create
+            </button>
+            <button
+              type="button"
+              command="close"
+              commandfor="dialog"
+              class="mt-3 inline-flex w-full justify-center rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20 sm:mt-0 sm:w-auto"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </el-dialog-panel>
+    </div>
+  </dialog>
+</el-dialog>
+
+<div class="bg-main-color-dark flex flex-row">
+  <!-- SIDEBAR -->
+  <div
+    class="sticky top-0 h-screen w-[20vw] ps-4 pt-6 bg-main-color-dark overflow-y-scroll overflow-x-hidden scroller hidden lg:block"
+  >
+    <div class="min-h-[10%]">
+      <div
+        class="flex flex-col justify-center gap-2 w-[95%] border-b-2 pb-6 border-gray-detail-light-color"
+      >
+        <a
+          href="#"
+          class="rounded-md px-2 py-2 text-base font-semibold text-white bg-gray-detail-light-color flex flex-row items-center"
+        >
+          <img
+            src="{{url_for('static', filename='imgs/icon_sidebar_books.png')}}"
+            alt="Ícone Book"
+            width="28px"
+            height="28px"
+            class="inline align-middle"
+          />&nbsp; Library
+        </a>
+        <a
+          href=""
+          class="rounded-md px-3 py-2 text-base font-semibold text-white hover:bg-gray-detail-light-color flex flex-row items-center"
+        >
+          <img
+            src="{{url_for('static', filename='imgs/icon_sidebar_graduation_cap.png')}}"
+            alt="Ícone Interview"
+            width="28px"
+            height="28px"
+            class="inline align-middle"
+          />&nbsp; Study Plan
+        </a>
+      </div>
+    </div>
+    <div class="max-w-[95%] mt-6 text-gray-color">
+      <details class="mb-2 ps-1" open>
+        <summary
+          class="rounded-lg cursor-pointer flex flex-row items-center justify-between"
+        >
+          <span class="text-sm font-semibold text-gray-color">My Lists</span>
+          <el-dropdown class="inline-block">
+            <button
+              class="inline-flex w-full h-full justify-center items-center gap-x-1.5 text-xl font-normal text-gray-300 cursor-pointer px-2 py-2 rounded-md hover:bg-gray-detail-light-color highlight-effect"
+            >
+              <span class="text-xl leading-none font-normal text-white">+</span>
+              <svg
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                data-slot="icon"
+                aria-hidden="true"
+                class="-mr-1 size-4 text-gray-300"
+              >
+                <path
+                  d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                  clip-rule="evenodd"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </button>
+
+            <el-menu
+              anchor="bottom start"
+              popover
+              class="w-55 origin-top-right rounded-md bg-main-color outline-1 -outline-offset-1 outline-white/10 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+            >
+              <div class="py-1 px-1">
+                <button
+                  command="show-modal"
+                  commandfor="dialog"
+                  class="flex flex-row items-center px-2 py-2 w-[100%] text-sm text-gray-300 rounded-md focus:bg-white/5 focus:text-white focus:outline-hidden highlight-effect"
+                >
+                  <img
+                    src="{{url_for('static', filename='imgs/icon_plus_white.png')}}"
+                    alt="Ícone Interview"
+                    class="h-[14px] w-[14px]"
+                  />&nbsp; <span class="">New List</span>
+                </button>
+                <a
+                  href="#"
+                  class="flex flex-row items-center px-2 py-2 text-sm text-purple rounded-md focus:bg-white/5 focus:outline-hidden"
+                  ><img
+                    src="{{url_for('static', filename='imgs/icon_sidebar_electrons.png')}}"
+                    alt="Ícone Interview"
+                    class="h-[14px] w-[14px]"
+                  />&nbsp; <span class="">New Smart List...</span></a
+                >
+              </div>
+            </el-menu>
+          </el-dropdown>
+        </summary>
+        {% for myListItem in my_list %}
+        <a
+          href="#"
+          class="rounded-md py-1 pe-0.5 text-sm font-semibold text-white hover:bg-gray-detail-light-color flex flex-row justify-between items-center"
+        >
+          <div>
+            {% if loop.index == 1 %}
+            <img
+              src="{{url_for('static', filename='imgs/sidebar_star_icon.webp')}}"
+              alt="Ícone Book"
+              width="22px"
+              height="22px"
+              class="inline align-middle rounded-md"
+            />&nbsp; {{myListItem.title}} {% else %}
+            <img
+              src="{{url_for('static', filename='imgs/sidebar_note_icon.png')}}"
+              alt="Ícone Book"
+              width="22px"
+              height="22px"
+              class="inline align-middle rounded-md"
+            />&nbsp; {{myListItem.title}} {% endif %}
+          </div>
+          {% if myListItem.visibility == 'private' %}
+          <img
+            src="{{url_for('static', filename='imgs/icon_menu_lock.png')}}"
+            alt="Ícone Book"
+            class="h-[18px] w-[14px]"
+          />
+          {% else %}
+          <img
+            src="{{url_for('static', filename='imgs/icon_menu_world.png')}}"
+            alt="Ícone Book"
+            class="h-[15px] w-[15px]"
+          />
+          {% endif %}
+        </a>
+        {% endfor %}
+      </details>
+    </div>
+  </div>
+  <!-- END SIDEBAR -->
+  <!-- MAIN CONTENT -->
+  <div class="w-[100vw] lg:w-[80vw] px-2 lg:px-6 pt-12">
+    <div class="w-full relative">
+      <div class="swiper multiple-slide-carousel swiper-container relative">
+        <div class="absolute left-0 right-0 bottom-0 w-full h-full">
+          <button
+            id="slider-button-left"
+            class="swiper-button-prev group !p-2 flex justify-center items-center !w-8 !h-8 transition-all duration-500 rounded-full bg-white/90 hover:bg-white/70"
+            data-carousel-prev
+          >
+            <svg
+              class="h-8 w-8 text-black group-hover:text-black"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <path
+                d="M10.0002 11.9999L6 7.99971L10.0025 3.99719"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <button
+            id="slider-button-right"
+            class="swiper-button-next group !p-2 flex justify-center items-center !w-8 !h-8 transition-all duration-500 rounded-full bg-white/90 hover:bg-white/70"
+            data-carousel-next
+          >
+            <svg
+              class="h-10 w-10 text-black group-hover:text-black"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <path
+                d="M5.99984 4.00012L10 8.00029L5.99748 12.0028"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="swiper-wrapper !p-0">
+          <div class="swiper-slide">
+            <div class="rounded-2xl">
+              <img
+                src="{{url_for('static', filename='imgs/main_content_carousel_item-01.png')}}"
+                alt="School Time Leet Code Advertisement"
+                class="w-[100%] h-[100%] rounded-2xl"
+              />
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="rounded-2xl h-[100%]">
+              <img
+                src="{{url_for('static', filename='imgs/main_content_carousel_item-02.jpeg')}}"
+                alt="School Time Leet Code Advertisement"
+                class="w-[100%] h-[100%] rounded-2xl"
+              />
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="rounded-2xl h-[100%]">
+              <img
+                src="{{url_for('static', filename='imgs/main_content_carousel_item-03.png')}}"
+                alt="School Time Leet Code Advertisement"
+                class="w-[100%] h-[100%] rounded-2xl"
+              />
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="rounded-2xl h-[100%]">
+              <img
+                src="{{url_for('static', filename='imgs/main_content_carousel_item-04.png')}}"
+                alt="School Time Leet Code Advertisement"
+                class="w-[100%] h-[100%] rounded-2xl"
+              />
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="rounded-2xl h-[100%]">
+              <img
+                src="{{url_for('static', filename='imgs/main_content_carousel_item-05.png')}}"
+                alt="School Time Leet Code Advertisement"
+                class="w-[100%] h-[100%] rounded-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="w-full flex flex-row justify-between flex-wrap text-xs text-white mt-8"
+    >
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>Array</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >1977</span
+        >
+      </div>
+
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>String</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >809</span
+        >
+      </div>
+
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>Hash Table</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >722</span
+        >
+      </div>
+
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>Dynamic Programming</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >609</span
+        >
+      </div>
+
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>Math</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >607</span
+        >
+      </div>
+
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>Sorting</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >467</span
+        >
+      </div>
+
+      <div class="flex flex-row items-center gap-1 w-fit">
+        <span>Greedy</span>
+        <span
+          class="text-gray-color px-1.5 py-.5 bg-gray-detail-color rounded-full"
+          >430</span
+        >
+      </div>
+    </div>
+    <div
+      class="w-full flex flex-row justify-start gap-4 flex-wrap text-xs text-white mt-8"
+    >
+      <div
+        class="flex flex-row px-6 py-2 bg-white text-main-color-dark text-base rounded-full"
+      >
+        <img src="" alt="" />
+        <span>All Topics</span>
+      </div>
+      <div
+        class="flex flex-row px-6 py-2 bg-gray-detail-light-color text-gray-color text-base rounded-full"
+      >
+        <img src="" alt="" />
+        <span>Algorithms</span>
+      </div>
+      <div
+        class="flex flex-row px-6 py-2 bg-gray-detail-light-color text-gray-color text-base rounded-full"
+      >
+        <img src="" alt="" />
+        <span>Database</span>
+      </div>
+      <div
+        class="flex flex-row px-6 py-2 bg-gray-detail-light-color text-gray-color text-base rounded-full"
+      >
+        <img src="" alt="" />
+        <span>Shell</span>
+      </div>
+      <div
+        class="flex flex-row px-6 py-2 bg-gray-detail-light-color text-gray-color text-base rounded-full"
+      >
+        <img src="" alt="" />
+        <span>Concurrency</span>
+      </div>
+    </div>
+    <hr class="my-4 border-1.5 border-main-color" />
+    <!-- SEARCH PROBLEM -->
+    <div class="flex flex-row justify-between items-center">
+      <div class="flex flex-row gap-1">
+        <label
+          for="default-search"
+          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+          >Search</label
+        >
+        <div class="relative">
+          <div
+            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+          >
+            <svg
+              class="w-4 h-4 text-gray-500 dark:text-gray-400"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+              />
+            </svg>
+          </div>
+          <input
+            type="search"
+            id="default-search"
+            class="block w-full py-1 ps-10 text-sm text-gray-900 rounded-full bg-main-color dark:border-gray-600 dark:placeholder-gray-color dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Search questions"
+            required
+          />
+        </div>
+        <div
+          class="rounded-full w-[28px] h-[28px] bg-main-color cursor-pointer flex justify-center items-center"
+        >
+          <img
+            src="{{url_for('static', filename='imgs/search_container_icon_imagem_sort.png')}}"
+            class="filter-icon w-[60%] h-[60%]"
+          />
+        </div>
+        <div
+          class="rounded-full w-[28px] h-[28px] bg-main-color cursor-pointer flex justify-center items-center"
+        >
+          <img
+            src="{{url_for('static', filename='imgs/search_container_icon_imagem_filter.png')}}"
+            class="filter-icon w-[50%] h-[50%]"
+          />
+        </div>
+      </div>
+
+      <div class="flex flex-row items-center gap-1.5">
+        <div
+          class="w-[20px] h-[20px] rounded-full border-gray-detail-color border-2"
+        ></div>
+        <span class="text-gray-color text-sm"
+          >{{problems_solved}}/{{ problems_list | length }} Solved</span
+        >
+        <div
+          class="rounded-full w-[28px] h-[28px] cursor-pointer flex justify-center items-center"
+        >
+          <img
+            src="{{url_for('static', filename='imgs/search_container_icon_imagem_shuffle.png')}}"
+            class="filter-icon-shuffle w-[50%] h-[50%]"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- END SEARCH PROBLEM -->
+    <!-- PROBLEMS LIST -->
+    <div class="w-full mt-4 problemList cursor-pointer">
+      {% for problem in problems_list %}
+      <div
+        class="flex flex-row justify-between px-4 py-3 lg:pe-32 md:pe-32 text-sm rounded-lg"
+      >
+        <span class="w-120 text-white font-semibold"
+          >{{loop.index}}. {{problem.name}}</span
+        >
+        <div class="flex flex-row gap-2 sm:gap-1">
+          <span class="w-30 text-gray-color">{{problem.solutionPercent}}%</span>
+          {% if problem.difficulty == "Easy" %}
+          <span class="text-[#1aabba]">Easy</span>
+          {% elif problem.difficulty == "Medium" %}
+          <span class="text-accent-color">Med.</span>
+          {% else %}
+          <span class="text-[#e93731]">Hard</span>
+          {% endif %}
+          <a
+            href="{{url_for('edit_single_problem', name=problem.name)}}"
+            class="rounded-full w-[28px] h-[28px] bg-main-color cursor-pointer flex justify-center items-center highlight-effect ms-8"
+          >
+            <img
+              src="{{url_for('static', filename='imgs/search_container_icon_imagem_edit.png')}}"
+              class="w-[50%] h-[60%]"
+            />
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- END PROBLEMS LIST -->
+  </div>
+  <!-- END MAIN CONTENT -->
+</div>
+{% endblock content %}

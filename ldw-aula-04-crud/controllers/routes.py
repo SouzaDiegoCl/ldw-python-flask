@@ -1,6 +1,7 @@
 from flask import render_template, url_for
 import json # Conversão dos dados
 import urllib #Envia Requisições a uma URL
+from models.database import Game
 
 def init_app(app):
     @app.route("/", methods=['GET'])
@@ -30,3 +31,18 @@ def init_app(app):
                 return f'Game com a ID {id} não encontrado!'
         else:
             return render_template('apigames.html', games=gamesList)
+    
+    @app.route('/newgame', methods=['GET', 'POST'])
+    def newgame(): #View Function
+        if request.method == 'POST':
+            #Coletando texto da input:
+            if request.form.get('titleInput') and request.form.get('yearInput') and request.form.get('categoryInput'):
+                gameList.append(Game(request.form.get('titleInput'), request.form.get('yearInput'), request.form.get('categoryInput'))) 
+                return redirect(url_for('newgame'))
+        
+        return render_template('newgame.html', gameList=gameList)
+    
+    @app.route('/estoque', methods=['GET', 'POST'])
+    def estoque():
+        gameEstoque = Game.query.all() #Query all é método 
+        return render_template('estoque.html')
