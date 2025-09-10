@@ -1,19 +1,25 @@
 {% extends 'template/base.html'%} {% block content %}
 
-<div class="sub-header">
-  <div class="flex flex-row items-center justify-center text-white text-sm">
+<div
+  class="w-[100vw] min-h-[20px] bg-[#282828] flex flex-row items-center justify-between px-2 sm:px-12 md:px-24 lg:px-32 py-2"
+>
+  <div
+    class="flex flex-row items-center justify-center text-white text-xs gap-4"
+  >
     <img
       src="{{url_for('static', filename='imgs/store_megaphone_icon.svg')}}"
       alt="Megaphone icon"
+      `
+      class="w-10 h-10"
     /><span
       >Discover
-      <a href="" class="text-[#107ae4]">how you can earn rewards</a> by inviting
-      more people to join LeetCode!</span
+      <a href="#" class="text-[#107ae4]">how you can earn rewards</a> by
+      inviting more people to join LeetCode!</span
     >
   </div>
   <div class="flex flex-row items-center gap-4">
     <div
-      class="w-8 h-8 rounded-full bg-[#373635] flex items-center justify-center"
+      class="w-6 h-6 rounded-full bg-[#373635] flex items-center justify-center"
     >
       <img
         src="{{url_for('static', filename='imgs/store_link_icon.png')}}"
@@ -24,18 +30,43 @@
     <img
       src="{{url_for('static', filename='imgs/store_facebook_icon.png')}}"
       alt="Link Icon"
-      class="w-8"
+      class="w-6"
     />
     <img
       src="{{url_for('static', filename='imgs/store_linkedin_icon.png')}}"
       alt="Link Icon"
-      class="w-8"
+      class="w-6"
     />
     <img
       src="{{url_for('static', filename='imgs/store_twitter_icon.png')}}"
       alt="Link Icon"
-      class="w-8"
+      class="w-6"
     />
+  </div>
+</div>
+<div class="w-[90vw] md:w-[60vw] text-white mx-auto my-[120px]">
+  <div class="text-center">
+    <h1 class="text-4xl font-bold">Bring LeetCode to Your School</h1>
+    <p class="text-md">
+      Gather <span class="text-lg font-semibold">50</span> or more schoolmates,<br />
+      get LeetCode Premium annually for a continued lifetime at only $179$119!
+    </p>
+  </div>
+  <div class="relative bg-[#f0f] mt-[80px]">
+    <img
+        src="{{url_for('static', filename='imgs/store_left_arrow.svg')}}"
+        alt="Arrow Icon"        
+        class="absolute left-0 top-0 -translate-y-full -translate-x-20"
+      />
+      <img
+        src="{{url_for('static', filename='imgs/store_right_arrow.png')}}"
+        alt="Arrow Icon"        
+        class="absolute w-[300px] right-0 top-0 -translate-y-35 translate-x-40"
+      />
+    <div class="w-100 bg-[#373025]">
+      <span>Limited time offer, 08/25 - 09/24</span>
+      <span>14d 04:32:53</span>
+    </div>
   </div>
 </div>
 

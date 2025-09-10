@@ -89,18 +89,6 @@
 
 
 /* STORE PAGE */
-.sub-header{
-    width: 100%;
-    min-height: 20px;
 
-    background-color: #282828;
-
-    display: flex;
-    flex: row;
-    justify-content: space-between;
-    align-items: center;
-
-    padding-inline: 4vw;
-}
 /* END STORE PAGE */
 
