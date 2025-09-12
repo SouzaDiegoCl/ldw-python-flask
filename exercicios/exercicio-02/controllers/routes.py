@@ -1,5 +1,23 @@
 """"Module providing view functions for all endpoints."""
 from flask import render_template, request, url_for, redirect
+import abacatepay
+
+# client = abacatepay.AbacatePay("<your-api-key>")
+client = abacatepay.AbacatePay("abc_dev_BQTsEnsXQegsemxKcsTb60bb")
+ONE_MINUTE = 60
+
+pix_qr = client.pixQrCode.create(
+    data='',
+    amount=500_00,  # (1)
+    description="Assinatura mensal",
+    expires_in=ONE_MINUTE,  # (2)
+    customer={  # (3)
+        "name": "Maria Silva",
+        "email": "maria@email.com",
+        "cellphone": "(11) 90000-0000",
+        "taxId": "506.201.998-22"
+    }
+)
 
 my_list = [
     {
@@ -165,4 +183,4 @@ def init_app(app):
     
     @app.route('/store', methods=['GET'])
     def store():
-        return render_template('store_page.html')
+        return render_template('store_page.html', URL=pix_qr.brcode_base64 )
