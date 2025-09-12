@@ -3,6 +3,8 @@ from flask import render_template, request, url_for, redirect
 import abacatepay
 
 # client = abacatepay.AbacatePay("<your-api-key>")
+isPaid = False
+
 client = abacatepay.AbacatePay("abc_dev_BQTsEnsXQegsemxKcsTb60bb")
 ONE_MINUTE = 60
 
@@ -181,6 +183,11 @@ def init_app(app):
         else:
             return redirect(url_for('index'))
     
-    @app.route('/store', methods=['GET'])
+    @app.route('/store', methods=['GET', 'POST'])
     def store():
-        return render_template('store_page.html', URL=pix_qr.brcode_base64 )
+        if request.method == 'GET':
+            return render_template('store_page.html', isPaid=isPaid, URL=pix_qr.brcode_base64 )
+        elif  request.method == 'POST':
+            pixPago = client.pixQrCode.simulate(pix_qr.id)
+            isPaid = True
+            return render_template('store_page.html', isPaid=isPaid, paymentStatus=pixPago )
