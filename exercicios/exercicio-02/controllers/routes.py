@@ -1,11 +1,13 @@
 """"Module providing view functions for all endpoints."""
 from flask import render_template, request, url_for, redirect
 import abacatepay
+import json  # Conversão dos dados
+import urllib  # Envia Requisições a uma URL
 
 # client = abacatepay.AbacatePay("<your-api-key>")
 isPaid = False
 
-client = abacatepay.AbacatePay("abc_dev_BQTsEnsXQegsemxKcsTb60bb")
+client = abacatepay.AbacatePay("API-KEY")
 ONE_MINUTE = 60
 
 pix_qr = client.pixQrCode.create(
@@ -182,12 +184,56 @@ def init_app(app):
             return redirect(url_for('index'))
         else:
             return redirect(url_for('index'))
-    
+
     @app.route('/store', methods=['GET', 'POST'])
     def store():
+        global isPaid
         if request.method == 'GET':
-            return render_template('store_page.html', isPaid=isPaid, URL=pix_qr.brcode_base64 )
-        elif  request.method == 'POST':
+            return render_template('store_page.html', isPaid=isPaid, URL=pix_qr.brcode_base64)
+        elif request.method == 'POST':
             pixPago = client.pixQrCode.simulate(pix_qr.id)
             isPaid = True
-            return render_template('store_page.html', isPaid=isPaid, paymentStatus=pixPago )
+            return render_template('store_page.html', isPaid=isPaid, paymentStatus=pixPago)
+
+    @app.route('/real_problems', methods=['GET'])
+    @app.route('/real_problems/<string:title_slug>', methods=['GET'])
+    def real_problems(title_slug=None):
+
+        if title_slug is None:
+            url = 'https://leetcode-api-pied.vercel.app/problems'
+            response = urllib.request.urlopen(url)
+            data = response.read()
+            real_problems_list = json.loads(data)
+
+            # {
+            #     "id": "1",
+            #     "frontend_id": "1",
+            #     "title": "Two Sum",
+            #     "title_slug": "two-sum",
+            #     "url": "https://leetcode.com/problems/two-sum/",
+            #     "difficulty": "Easy",
+            #     "paid_only": false,
+            #     "has_solution": true,
+            #     "has_video_solution": true
+            # }
+
+            return render_template('real_problems.html', problems_list=real_problems_list)
+        else:
+            url = 'https://leetcode-api-pied.vercel.app/problem/' + title_slug
+            response = urllib.request.urlopen(url)
+            data = response.read()
+            real_problem = json.loads(data)
+
+            # {
+            #     "id": "1",
+            #     "frontend_id": "1",
+            #     "title": "Two Sum",
+            #     "title_slug": "two-sum",
+            #     "url": "https://leetcode.com/problems/two-sum/",
+            #     "difficulty": "Easy",
+            #     "paid_only": false,
+            #     "has_solution": true,
+            #     "has_video_solution": true
+            # }
+
+            return render_template('real_problem_info.html', real_problem=real_problem)

@@ -1,0 +1,33 @@
+{% extends 'template/base.html'%} {% block content %}
+<h1 class="mx-4 my-8 text-2xl text-white font-bold">Real Problems</h1>
+<div class="w-full mt-4 px-4 problemList">
+  {% for problem in problems_list %}
+  <div
+    class="flex flex-row justify-between px-4 py-3 lg:pe-32 md:pe-32 text-sm rounded-lg"
+  >
+    <span class="w-120 text-white font-semibold"
+      >{{problem.id}}. {{problem.title}}</span
+    >
+    <div class="flex flex-row items-center gap-2 sm:gap-1">      
+      {% if problem.difficulty == "Easy" %}
+      <span class="text-[#1aabba]">Easy</span>
+      {% elif problem.difficulty == "Medium" %}
+      <span class="text-accent-color">Med.</span>
+      {% else %}
+      <span class="text-[#e93731]">Hard</span>
+      {% endif %}
+      <a
+        href="{{url_for('real_problems', title_slug=problem.title_slug)}}"
+        class="rounded-full w-[28px] h-[28px] cursor-pointer flex justify-center items-center highlight-effect ms-8"
+      >
+        <img
+          src="{{url_for('static', filename='imgs/real_problems_info.png')}}"
+          class="w-[50%] h-[60%]"
+        />
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
