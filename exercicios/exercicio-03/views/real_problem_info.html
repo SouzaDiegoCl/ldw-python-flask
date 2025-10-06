@@ -1,0 +1,133 @@
+{% extends 'template/base.html' %} {% block content %}
+
+<div
+  class="w-ful h-[84vh] flex flex-row flex-wrap gap-2 justify-center px-1 py-2"
+>
+  <div class="w-[100%] lg:w-[48%] md:w-[48%]">
+    <div
+      class="w-full h-fit pb-2 md:pb-0 md:h-[38px] bg-gray-detail-dark-color flex flex-row flex-wrap items-center justify-start gap-3 rounded-tl-lg rounded-tr-lg border-t-1 border-l-1 border-r-1 border-gray-color text-gray-color font-normal text-sm"
+    >
+      <div class="flex fex-row items-center gap-1 ms-4">
+        <img
+          src="{{url_for('static', filename='imgs/edit_single_problem_icon_description.png')}}"
+          class="w-[15px] h-[15px]"
+        />
+        <span class="text-white font-semibold">Description</span>
+      </div>
+      <span>|</span>
+      <div class="flex fex-row items-center gap-1">
+        <img
+          src="{{url_for('static', filename='imgs/edit_single_problem_icon_editorial.png')}}"
+          class="w-[25px] h-[25px]"
+        />
+        <span>Editorial</span>
+      </div>
+      <span>|</span>
+      <div class="flex fex-row items-center gap-1">
+        <img
+          src="{{url_for('static', filename='imgs/edit_single_problem_icon_solutions.png')}}"
+          class="w-[15px] h-[15px]"
+        />
+        <span>Solutions</span>
+      </div>
+      <span>|</span>
+      <div class="flex fex-row items-center gap-1">
+        <img
+          src="{{url_for('static', filename='imgs/edit_single_problem_icon_subimissions.png')}}"
+          class="w-[14px] h-[14px]"
+        />
+        <span>Submissions</span>
+      </div>
+    </div>
+    <div
+      class="bg-gray-detail-light-color h-[100%] ps-4 pt-4 border-x-1 border-l-1 border-r-1 border-gray-color rounded-b-lg border-b-1 border-gray-color overflow-y-auto"
+    >
+      <h1
+        class="text-sm md:text-sm lg:text-2xl font-semibold text-white border-white rounded-lg px-2 py-1"
+      >
+        {{ real_problem.title }}
+      </h1>
+
+      <!-- Difficulty and Hint -->
+      <div
+        class="mt-2 flex flex-row gap-1 justify-start text-xs font-normal {% if real_problem.difficulty == 'Easy' %} text-[#1aabba] {% elif real_problem.difficulty == 'Medium' %} text-accent-color {% else %} text-[#e93731] {% endif %}"
+      >
+        <span>{{ real_problem.difficulty }}</span>
+
+        {% if real_problem.hints %}
+        <span
+          class="px-2 py-0.5 bg-gray-detail-color text-white rounded-full flex flex-row gap-2 items-center justify-center"
+        >
+          <img
+            src="{{url_for('static', filename='imgs/edit_single_problem_icon_lamp.png')}}"
+            class="w-[14px] h-[14px]"
+          />
+          Hint
+        </span>
+        {% endif %}
+      </div>
+
+      <!-- Problem Content -->
+      <div
+        class="text-white font-normal mt-4 prose prose-invert prose-sm max-w-none"
+      >
+        {{ real_problem.content | safe }}
+      </div>
+
+      <!-- Hints -->
+      {% if real_problem.hints %}
+      <div class="mt-6 text-white">
+        <h2 class="text-lg font-semibold">Hints:</h2>
+        <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
+          {% for hint in real_problem.hints %}
+          <li>{{ hint | safe }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <!-- Tags -->
+      {% if real_problem.topicTags %}
+      <div class="mt-6 text-white">
+        <h2 class="text-lg font-semibold">Tags:</h2>
+        <div class="flex flex-wrap gap-2 mt-2">
+          {% for tag in real_problem.topicTags %}
+          <span
+            class="bg-gray-detail-color text-white px-2 py-1 rounded-full text-xs"
+            >{{ tag.name }}</span
+          >
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- LeetCode Link -->
+      <div class="mt-6">
+        <a
+          href="{{ real_problem.url }}"
+          target="_blank"
+          class="text-accent-color underline text-sm"
+          >Ver no LeetCode →</a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="w-[100%] lg:w-[48%] md:w-[48%]">
+    <div
+      class="w-full h-[38px] bg-gray-detail-dark-color flex flex-row items-center flex-wrap justify-start gap-3 rounded-tl-lg rounded-tr-lg border-t-1 border-l-1 border-r-1 border-gray-color text-gray-color font-normal text-sm"
+    >
+      <div class="flex fex-row items-center gap-1 ms-4">
+        <img
+          src="{{url_for('static', filename='imgs/edit_single_problem_icon_code.png')}}"
+          class="w-[20px] h-[20px]"
+        />
+        <span class="text-white font-semibold">Code</span>
+      </div>
+    </div>
+    <div
+      class="bg-main-color h-[100%] ps-4 pt-4 border-x-1 border-gray-color rounded-b-lg border-b-1 border-gray-color"
+    ></div>
+  </div>
+
+  {% endblock content %}
+</div>
