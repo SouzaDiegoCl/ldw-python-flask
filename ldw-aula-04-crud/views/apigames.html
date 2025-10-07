@@ -1,13 +1,22 @@
-{% extends 'base.html' %} {% block content %}
-<h1 class="mx-auto">apigames</h1>
-<div class="w-[100%] h-fit flex flex-row flex-wrap justify-between">
-  {% for game in games%}
-  <div class="rounded-lg border-1 border-black mt-1">
-    <img src="{{game.thumbnail}}" />
-    <span class="text-black">{{game.title}}</span>
-    <span class="text-black">{{game.id}}</span>
-    <a href="{{url_for('apigames',id=game.id)}}">Link</a>
-  </div>
-  {% endfor %}
+{% extends 'base.html' %}
+{% block content %}
+<div class="container" style="background-color: #f0f0f0; border-radius: 8px;">
+    <div class="row">
+        {% for game in gamesList %}
+        <div class="col-md-3 m-auto">
+            <div class="card" style="width: 16rem;">
+                <img src="{{game.thumbnail}}" alt="Imagem do jogo">
+                <div class="card-body">
+                    <h5>{{game.title}}</h5>
+                    <p>{{game.genre}}</p>
+                    <p>{{game.platform}}</p>
+
+                    <a href="{{url_for('apigames', id=game.id)}}" class="btn btn-dark">+ Info</a>
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock content %}
